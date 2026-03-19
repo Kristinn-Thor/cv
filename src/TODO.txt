@@ -1,7 +1,0 @@
-- Búa til kvarðabakgrunn í skills -------------------------- DONE
-- Búa til 5 flott verkefni í projects
-- Gera flotta hreifimynd fyrir projects ---------------------DONE
-- Útfæra 'hover effect' fyrir hvert element í projects ------DONE
-- Bæta við 'icon'-um í contact síðuna -----------------------DONE
-- Útfæra póstsendingarþjónustu á contact siðuna
-- Gera texta um mig og setja inn mynd í about
