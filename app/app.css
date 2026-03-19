@@ -1,15 +1,108 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    'Saira', sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
-
+  color: rgb(68, 68, 68);
+  @apply bg-(--light-bg-color) dark:bg-(--dark-bg-color);
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
+    color: rgb(200, 200, 200);
   }
+}
+
+h1 {
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  letter-spacing: 2px;
+}
+
+p {
+  letter-spacing: 1.5px;
+  max-width: 60ch;
+}
+
+/* Custom CSS Variables */
+:root {
+  /* Colors */
+  --dark-bg-color: #0d1626;
+  --light-bg-color: #fdfffc;
+  --overlay-color: rgba(196, 196, 196, 0.1);
+  --overlay-color-lm: rgba(196, 196, 196, 0.295); /* Light-Mode */
+  --theme-color-blue: #5562dd;
+  --theme-color-green: #29d9b9;
+  --theme-color-green-lm: #00ff87; /* Light-Mode */
+  --theme-color-blue-lm: #60efff; /* Light-Mode */
+  --icon-color: var(--theme-color-green); /* default (dark mode) */
+  --text-highlight-color: var(--theme-color-green); /* default (dark mode) */
+  --javascript-color: #f0db4f;
+  --html-color: #f06529;
+  --css-color: #2965f1;
+  --gsap-color: #08d80c;
+  --react-color: #61dbfb;
+  --git-color: #e84d31;
+  --java-color: #ea8c10;
+  --npm-color: #c53635;
+  --container-bg-color: rgba(196, 196, 196, 0.05);
+  /* NAV-Colors */
+  --effect-color: rgba(152, 159, 226, 0.3);
+  --effect-color-lm: rgba(25, 106, 153, 0.3);
+  /* TickTackToe-Colors */
+  --board-color: var(--board-dm); /* default (dark mode) */
+  --board-dm: #aab1a9;
+  --board-lm: #2a4677;
+}
+
+@media (color-scheme: light) {
+  :root {
+    --icon-color: var(--theme-color-blue); /* light mode */
+    --text-highlight-color: var(--theme-color-blue); /* light mode */
+    --board-color: var(--board-lm); /* light mode */
+  }
+}
+
+.Mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  min-height: 100%;
+  background: linear-gradient(
+    45deg,
+    var(--theme-color-blue),
+    var(--theme-color-green)
+  );
+  mask-image: url(./svg/Background-Lines.svg);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: cover;
+  z-index: -1;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: true;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 1turn;
+  }
+}
+
+.RotatingBorderEffect {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(#161f2e 0 0) padding-box,
+    conic-gradient(from var(--angle), #0d1626, #13584c, #0d1626) border-box;
+  animation: rotate 2s linear infinite;
 }
