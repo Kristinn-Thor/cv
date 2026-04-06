@@ -98,7 +98,7 @@ const TicTackToe: React.FC<{lightOn: boolean}> = ({lightOn}) => {
   }
 
   return (
-    <div className="flex items-center h-screen flex-col sm:flex-row">
+    <div className="flex items-center h-screen flex-col pt-20 sm:flex-row sm:pt-0">
       <div className="flex justify-center items-center w-full  h-full sm:w-1/2 sm:h-1/2">
         <Board
           squares={current.squares}

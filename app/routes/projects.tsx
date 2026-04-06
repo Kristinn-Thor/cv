@@ -1,21 +1,17 @@
 import {useEffect} from 'react';
-import type {Route} from './+types/projects';
 import gsap from 'gsap';
 import {Link} from 'react-router';
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    {title: 'Kristinn - Cirriculum Vitae'},
-    {name: 'description', content: 'Welcome to my homepage!'},
-  ];
-}
-
 export default function Projects() {
   useEffect(() => {
-    gsap.to('.AboutHeader', {
+    const classesToAnimate = [
+      '.AboutHeader',
+      ...projectList.map((p) => `.${p.className}`),
+    ].join(', ');
+    gsap.to(classesToAnimate, {
       opacity: '1',
-      duration: 2,
-      stagger: 0.3,
+      duration: 1,
+      stagger: 0.1,
     });
   }, []);
 
@@ -29,18 +25,18 @@ export default function Projects() {
         {projectList.map((project, index) => (
           <li
             key={index}
-            className="w-max hover:bg-(--effect-color) rounded-lg p-1 transition-colors duration-300"
+            className={`${project.className} opacity-0 rounded-lg p-1 transition-colors duration-300 hover:bg-(--effect-color)`}
           >
             <Link
               to={project.link}
               className="text-(--text-highlight-color)"
               rel="noopener noreferrer"
             >
-              <div className="flex">
-                <p className="font-bold">{project.title}</p>
-                <p className="mx-1">-</p>
-                <p>{project.description}</p>
-              </div>
+              <p className="">
+                <span className="font-bold">{project.title}</span>
+                <span className="mx-1">-</span>
+                <span>{project.description}</span>
+              </p>
             </Link>
           </li>
         ))}
@@ -49,15 +45,28 @@ export default function Projects() {
   );
 }
 
-const projectList: {title: string; description: string; link: string}[] = [
+const projectList: {
+  title: string;
+  description: string;
+  link: string;
+  className: string;
+}[] = [
   {
     title: 'Milla',
     description: 'Einfaldur milluleikur útfærður í React',
     link: '/games',
+    className: 'ProjectListItem1',
+  },
+  {
+    title: 'Myndaalbúm',
+    description: 'Einföld myndasíða skrifuð í html, css og js',
+    link: 'https://kristinn-thor.github.io/lazy-loading-img/',
+    className: 'ProjectListItem2',
   },
   {
     title: 'AI Assistant',
     description: 'Gervigreindartól byggt á Claude Code',
     link: '/ai-assistant',
+    className: 'ProjectListItem3',
   },
 ];

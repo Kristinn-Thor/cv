@@ -8,7 +8,7 @@
 
 html,
 body {
-  color: rgb(68, 68, 68);
+  color: hsl(0, 0%, 27%);
   @apply bg-(--light-bg-color) dark:bg-(--dark-bg-color);
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
@@ -32,16 +32,24 @@ p {
 /* Custom CSS Variables */
 :root {
   /* Colors */
-  --dark-bg-color: #0d1626;
-  --light-bg-color: #fdfffc;
+  --bg-color: var(--dark-bg-color); /* default (dark mode) */
+  --dark-bg-color: hsl(218, 49%, 10%);
+  --light-bg-color: hsl(100, 100%, 99%);
+  --bg-color-transparent: var(
+    --dark-bg-color-transparent
+  ); /* default (dark mode) */
+  --dark-bg-color-transparent: hsl(218, 49%, 10%, 0.95);
+  --light-bg-color-transparent: hsl(100, 100%, 99%, 0.95);
   --overlay-color: rgba(196, 196, 196, 0.1);
   --overlay-color-lm: rgba(196, 196, 196, 0.295); /* Light-Mode */
+  --container-bg-color: rgba(196, 196, 196, 0.05);
   --theme-color-blue: #5562dd;
   --theme-color-green: #29d9b9;
   --theme-color-green-lm: #00ff87; /* Light-Mode */
   --theme-color-blue-lm: #60efff; /* Light-Mode */
   --icon-color: var(--theme-color-green); /* default (dark mode) */
   --text-highlight-color: var(--theme-color-green); /* default (dark mode) */
+  /* Skill-Colors */
   --javascript-color: #f0db4f;
   --html-color: #f06529;
   --css-color: #2965f1;
@@ -50,8 +58,8 @@ p {
   --git-color: #e84d31;
   --java-color: #ea8c10;
   --npm-color: #c53635;
-  --container-bg-color: rgba(196, 196, 196, 0.05);
   /* NAV-Colors */
+  --nav-color: var(--effect-color); /* default (dark mode) */
   --effect-color: rgba(152, 159, 226, 0.3);
   --effect-color-lm: rgba(25, 106, 153, 0.3);
   /* TickTackToe-Colors */
@@ -62,9 +70,12 @@ p {
 
 @media (color-scheme: light) {
   :root {
+    --bg-color: var(--light-bg-color); /* light mode */
+    --bg-color-transparent: var(--light-bg-color-transparent); /* light mode */
     --icon-color: var(--theme-color-blue); /* light mode */
     --text-highlight-color: var(--theme-color-blue); /* light mode */
     --board-color: var(--board-lm); /* light mode */
+    --nav-color: var(--effect-color-lm); /* light mode */
   }
 }
 
@@ -105,4 +116,12 @@ p {
     linear-gradient(#161f2e 0 0) padding-box,
     conic-gradient(from var(--angle), #0d1626, #13584c, #0d1626) border-box;
   animation: rotate 2s linear infinite;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

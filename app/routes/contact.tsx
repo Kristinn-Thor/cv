@@ -16,14 +16,13 @@ export default function Contact() {
     gsap.fromTo(
       '.ContactTitle, .ContactEmail, .ContactPhone',
       {
-        x: '-700',
         opacity: '0',
       },
       {
-        x: '0',
         opacity: '1',
+        duration: 1,
         stagger: 0.1,
-      }
+      },
     );
   }, []);
   return (

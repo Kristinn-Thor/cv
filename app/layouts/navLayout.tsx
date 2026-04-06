@@ -6,7 +6,7 @@ import {faAdjust} from '@fortawesome/free-solid-svg-icons';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    {title: 'Kristinn - Cirriculum Vitae'},
+    {title: 'Cirriculum Vitae | Kristinn'},
     {name: 'description', content: 'Welcome to my homepage!'},
   ];
 }

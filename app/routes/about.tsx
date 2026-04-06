@@ -13,8 +13,8 @@ export default function About() {
   useEffect(() => {
     gsap.to('.AboutTitle, .AboutText', {
       opacity: '1',
-      duration: 2,
-      stagger: 0.3,
+      duration: 1,
+      stagger: 0.1,
     });
   }, []);
   return (

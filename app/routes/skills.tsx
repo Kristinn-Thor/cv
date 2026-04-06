@@ -1,5 +1,4 @@
 import IconCircle from '~/components/iconCircle';
-import type {Route} from './+types/skills';
 import {useEffect} from 'react';
 import gsap from 'gsap';
 
@@ -12,19 +11,12 @@ import gitLogo from '../svg/git-brands.svg';
 import javaLogo from '../svg/Vector-java.svg';
 import npmLogo from '../svg/npm-brands.svg';
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    {title: 'Kristinn - Cirriculum Vitae'},
-    {name: 'description', content: 'Welcome to my homepage!'},
-  ];
-}
-
 export default function Skills() {
   useEffect(() => {
     gsap.to('.SkilsTitle, .SkilsText, .SkilsIconContainer', {
       opacity: 1,
-      duration: 2.5,
-      stagger: 0.3,
+      duration: 1,
+      stagger: 0.1,
     });
   }, []);
 
@@ -32,12 +24,12 @@ export default function Skills() {
     <div className="relative flex flex-col items-center px-[10%] pt-[100px] pb-[120px] overflow-hidden w-full h-screen z-0">
       <div className="Mask" style={{opacity: 1}} />
       <h1 className="SkilsTitle font-bold text-4xl text-(--text-highlight-color) mb-[25px] opacity-0">
-        Tæknikunnátta
+        Tæknistakkur
       </h1>
 
       <div className="max-w-xl">
         <p className="SkilsText bg-(--container-bg-color) rounded-2xl p-4 mb-5 opacity-0">
-          <span>Helstu tæki og tól sem ég unnið með eru eftirfarandi:</span>
+          <span>Ótæmandi listi af tólum sem ég hef unnið með:</span>
           <br />
           HTML - CSS - JavaScript - React - node.js - express.js - GraphQL - SQL
         </p>
@@ -46,7 +38,7 @@ export default function Skills() {
             <IconCircle
               from={0}
               to={360}
-              duration={2}
+              duration={1}
               logoSource={icon.src}
               logoScale={icon.scale}
               logoX={icon.x}
