@@ -11,4 +11,10 @@ export default defineConfig({
     tsconfigPaths(),
     netlifyReactRouter(),
   ],
+  optimizeDeps: {
+    include: ['gsap/ScrollToPlugin'],
+  },
+  ssr: {
+    noExternal: ['gsap'],
+  },
 });
