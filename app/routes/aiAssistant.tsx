@@ -1,49 +1,50 @@
-import {Link} from 'react-router';
-import type {Route} from './+types/contact';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-import AiAssistant from '~/components/aiAssistant';
+import {useEffect} from 'react';
+import gsap from 'gsap';
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    {title: 'Kristinn - Cirriculum Vitae'},
-    {name: 'description', content: 'Welcome to my homepage!'},
-  ];
-}
+import AiAssistant from '~/components/aiAssistant';
+import GoBackButton from '~/components/goBackButton';
+import InfoWindow from '~/components/infoWindow';
 
 export default function AIAssistant() {
+  useEffect(() => {
+    gsap.to('.Page', {
+      opacity: '1',
+      duration: 2,
+    });
+  }, []);
+
   return (
-    <div className="relative w-full h-screen px-4">
-      <div className="absolute top-10 left-10">
-        <Link to="/projects" className="flex items-center">
-          <FontAwesomeIcon
-            icon={faArrowLeft}
-            className="text-[1.5em] transition-opacity ease-in-out duration-300 group-hover:opacity-0"
-            style={{color: 'var(--icon-color)'}}
-          />
-          <p className="ml-2">Til baka</p>
-        </Link>
+    <div className="relative flex flex-col w-full h-screen max-h-screen px-4 Page opacity-0">
+      <div className="absolute top-5 left-4 z-20">
+        <GoBackButton to="/projects" color="var(--theme-color-green)" />
       </div>
-      <section className="flex flex-col items-center">
-        <h1 className="text-4xl font-bold mt-20">AI Assistant</h1>
+      <InfoWindow>
+        <h1 className="text-4xl font-bold">AI Assistant</h1>
         <p className="mt-4">
-          Gervigreindartól byggt á Claude Code {'->'}
-          <a
-            href="https://github.com/Kristinn-Thor/claude-code-typescript"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-1 text-(--text-highlight-color)"
-          >
-            sjá GitHub repo
-          </a>
+          Gervigreindartól byggt á Claude Code.
           <br />
-          Ath: Gervigreindarmódelið er ókeypis útgáfa frá Open Router og gæti
-          því tekið smá tíma að svara og hefur þak á "tokens".
+          <span>
+            <a
+              href="https://github.com/Kristinn-Thor/claude-code-typescript"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1 text-(--text-highlight-color)"
+            >
+              GitHub repo
+            </a>
+          </span>
+          <br />
+          <br />
+          <span className="text-sm italic">
+            Ath: Gervigreindarmódelið er ókeypis útgáfa frá Open Router og gæti
+            því tekið smá tíma að svara, auk þess að hafa takmörk á fjölda
+            "tokens".
+          </span>
         </p>
-      </section>
-      <section className="mt-50">
+      </InfoWindow>
+      <div className="flex flex-1 min-h-0 justify-center items-center z-0">
         <AiAssistant />
-      </section>
+      </div>
     </div>
   );
 }

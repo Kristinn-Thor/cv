@@ -1,3 +1,6 @@
+const API_URL = 'https://ai-assistant-m0zp.onrender.com/assistant';
+const PING_URL = 'https://ai-assistant-m0zp.onrender.com/';
+
 export type ChatHistory = {
   role: 'user' | 'assistant';
   content: string;
@@ -17,17 +20,13 @@ type AiResponse = {
 
 export const sendMessage = async (message: AiRequest): Promise<AiResponse> => {
   try {
-    console.log('Sending message to AI Assistant:', message);
-    const response = await fetch(
-      'https://ai-assistant-m0zp.onrender.com/assistant',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(message),
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify(message),
+    });
 
     if (!response.ok) {
       console.error(
@@ -43,7 +42,6 @@ export const sendMessage = async (message: AiRequest): Promise<AiResponse> => {
       };
     }
     const data: AiResponse = await response.json();
-    console.log('Received response from AI Assistant:', data);
     return data;
   } catch (error) {
     console.error('Error communicating with AI Assistant:', error);
@@ -52,5 +50,15 @@ export const sendMessage = async (message: AiRequest): Promise<AiResponse> => {
       history: [],
       message: 'Sorry, there was an error processing your request.',
     };
+  }
+};
+
+export const pingServer = async (): Promise<boolean> => {
+  try {
+    const response = await fetch(PING_URL);
+    return response.ok;
+  } catch (error) {
+    console.error('Error pinging AI Assistant server:', error);
+    return false;
   }
 };
