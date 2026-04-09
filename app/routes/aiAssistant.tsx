@@ -16,7 +16,7 @@ export default function AIAssistant() {
   return (
     <div className="relative flex flex-col w-full h-screen max-h-screen px-4 Page opacity-0">
       <div className="absolute top-5 left-4 z-20">
-        <GoBackButton to="/projects" color="var(--theme-color-green)" />
+        <GoBackButton to="/projects" />
       </div>
       <InfoWindow>
         <h1 className="text-4xl font-bold">AI Assistant</h1>

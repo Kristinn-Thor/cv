@@ -15,7 +15,7 @@ export default function Navbar() {
                   h-[8vw] min-w-[270px] max-w-[800px]
                   min-h-[50px] max-h-[50px]
                   m-[0_10px_0_10px] rounded-[50px] z-2
-                  bg-(--effect-color)
+                  bg-(--nav-color)
                 "
     >
       <NavbarLink
@@ -27,7 +27,7 @@ export default function Navbar() {
       <NavbarLink
         to="/skills"
         icon={faChartBar}
-        text="Kunnátta"
+        text="Tæknistakkur"
         ariaLabel="Hvað ég kann"
       />
       <Link

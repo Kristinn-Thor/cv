@@ -49,7 +49,7 @@ export const RenderChat: React.FC<RenderChatProps> = ({
       ref={animatedDivRef}
       className="relative min-h-0 overflow-y-auto scrollbar-hide mt-10"
     >
-      <div className="sticky top-0 left-0 h-14 w-full bg-[linear-gradient(rgba(13,22,38,1)_0%,rgba(13,22,38,0)_100%)]" />
+      <div className="sticky top-0 left-0 h-14 w-full bg-[linear-gradient(hsla(var(--bg-hsl), 1)_0%,hsla(var(--bg-hsl), 0)_100%)]" />
       {chatHistory.slice(0, chatHistory.length - 1).map((entry, index) => (
         <div
           key={index}
@@ -69,7 +69,7 @@ export const RenderChat: React.FC<RenderChatProps> = ({
       <div className="p-3">
         <Markdown>{message}</Markdown>
       </div>
-      <div className="sticky bottom-0 left-0 h-14 w-full bg-[linear-gradient(rgba(13,22,38,0)_0%,rgba(13,22,38,1)_100%)]" />
+      <div className="sticky bottom-0 left-0 h-14 w-full bg-[linear-gradient(hsla(var(--bg-hsl), 0)_0%,hsla(var(--bg-hsl), 1)_100%)]" />
     </div>
   );
 };

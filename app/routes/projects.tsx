@@ -25,7 +25,7 @@ export default function Projects() {
         {projectList.map((project, index) => (
           <li
             key={index}
-            className={`${project.className} opacity-0 rounded-lg p-1 transition-colors duration-300 hover:bg-(--effect-color)`}
+            className={`${project.className} opacity-0 rounded-lg p-1 transition-colors duration-300 hover:bg-(--container-bg-color)`}
           >
             <Link
               to={project.link}

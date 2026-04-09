@@ -9,11 +9,39 @@
 html,
 body {
   color: hsl(0, 0%, 27%);
-  @apply bg-(--light-bg-color) dark:bg-(--dark-bg-color);
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-    color: rgb(200, 200, 200);
-  }
+  background: var(--bg-color);
+}
+
+body.light,
+.light {
+  --bg-color: var(--bg-color-lm);
+  --bg-hsl: var(--bg-hsl-lm);
+  --icon-color: var(--theme-color-blue);
+  --text-highlight-color: var(--theme-color-blue);
+  --container-bg-color: var(--container-bg-color-lm);
+  --input-bg-color: var(--input-bg-color-lm);
+  --board-color: var(--board-lm);
+  --nav-color: var(--nav-color-lm);
+  --ai-input-border-color: var(--ai-input-border-color-lm);
+  color: hsl(0, 0%, 27%);
+  background: var(--bg-color-lm);
+  color-scheme: light;
+}
+
+body.dark,
+.dark {
+  --bg-color: var(--bg-color-dm);
+  --bg-hsl: var(--bg-hsl-dm);
+  --icon-color: var(--theme-color-green);
+  --text-highlight-color: var(--theme-color-green);
+  --container-bg-color: var(--container-bg-color-dm);
+  --input-bg-color: var(--input-bg-color-dm);
+  --board-color: var(--board-dm);
+  --nav-color: var(--nav-color-dm);
+  --ai-input-border-color: var(--ai-input-border-color-dm);
+  color: hsl(0, 0%, 78%);
+  background: var(--bg-color-dm);
+  color-scheme: dark;
 }
 
 h1 {
@@ -31,24 +59,23 @@ p {
 
 /* Custom CSS Variables */
 :root {
-  /* Colors */
-  --bg-color: var(--dark-bg-color); /* default (dark mode) */
-  --dark-bg-color: hsl(218, 49%, 10%);
-  --light-bg-color: hsl(100, 100%, 99%);
-  --bg-color-transparent: var(
-    --dark-bg-color-transparent
-  ); /* default (dark mode) */
-  --dark-bg-color-transparent: hsl(218, 49%, 10%, 0.95);
-  --light-bg-color-transparent: hsl(100, 100%, 99%, 0.95);
-  --overlay-color: rgba(196, 196, 196, 0.1);
-  --overlay-color-lm: rgba(196, 196, 196, 0.295); /* Light-Mode */
-  --container-bg-color: rgba(196, 196, 196, 0.05);
-  --theme-color-blue: #5562dd;
-  --theme-color-green: #29d9b9;
-  --theme-color-green-lm: #00ff87; /* Light-Mode */
-  --theme-color-blue-lm: #60efff; /* Light-Mode */
-  --icon-color: var(--theme-color-green); /* default (dark mode) */
-  --text-highlight-color: var(--theme-color-green); /* default (dark mode) */
+  /* Colors (dark mode is default) */
+  --bg-color: var(--bg-color-dm);
+  --bg-hsl: var(--bg-hsl-dm);
+  --bg-hsl-dm: 218, 49%, 10%;
+  --bg-hsl-lm: 100, 100%, 99%;
+  --bg-color-dm: hsl(218, 49%, 10%);
+  --bg-color-lm: hsl(100, 100%, 99%);
+  --input-bg-color: var(--input-bg-color-dm);
+  --input-bg-color-dm: hsl(218, 26%, 17%);
+  --input-bg-color-lm: hsl(90, 14%, 95%);
+  --container-bg-color: var(--container-bg-color-dm);
+  --container-bg-color-dm: hsla(0, 0%, 77%, 0.05);
+  --container-bg-color-lm: hsla(0, 0%, 77%, 0.15);
+  --theme-color-blue: hsl(234, 67%, 60%);
+  --theme-color-green: hsl(169, 70%, 51%);
+  --icon-color: var(--theme-color-green);
+  --text-highlight-color: var(--theme-color-green);
   /* Skill-Colors */
   --javascript-color: #f0db4f;
   --html-color: #f06529;
@@ -59,24 +86,17 @@ p {
   --java-color: #ea8c10;
   --npm-color: #c53635;
   /* NAV-Colors */
-  --nav-color: var(--effect-color); /* default (dark mode) */
-  --effect-color: rgba(152, 159, 226, 0.3);
-  --effect-color-lm: rgba(25, 106, 153, 0.3);
+  --nav-color: var(--nav-color-dm);
+  --nav-color-dm: hsla(234, 56%, 74%, 0.3);
+  --nav-color-lm: hsla(202, 72%, 35%, 0.3);
   /* TickTackToe-Colors */
-  --board-color: var(--board-dm); /* default (dark mode) */
-  --board-dm: #aab1a9;
-  --board-lm: #2a4677;
-}
-
-@media (color-scheme: light) {
-  :root {
-    --bg-color: var(--light-bg-color); /* light mode */
-    --bg-color-transparent: var(--light-bg-color-transparent); /* light mode */
-    --icon-color: var(--theme-color-blue); /* light mode */
-    --text-highlight-color: var(--theme-color-blue); /* light mode */
-    --board-color: var(--board-lm); /* light mode */
-    --nav-color: var(--effect-color-lm); /* light mode */
-  }
+  --board-color: var(--board-dm);
+  --board-dm: hsl(113, 5%, 68%);
+  --board-lm: hsl(218, 48%, 32%);
+  /* AiAssistant-Colors */
+  --ai-input-border-color: var(--ai-input-border-color-dm);
+  --ai-input-border-color-dm: hsl(170, 64%, 21%);
+  --ai-input-border-color-lm: var(--theme-color-blue);
 }
 
 .Mask {
@@ -113,8 +133,14 @@ p {
 .RotatingBorderEffect {
   border: 3px solid transparent;
   background:
-    linear-gradient(#161f2e 0 0) padding-box,
-    conic-gradient(from var(--angle), #0d1626, #13584c, #0d1626) border-box;
+    linear-gradient(var(--input-bg-color) 0 0) padding-box,
+    conic-gradient(
+        from var(--angle),
+        var(--input-bg-color),
+        var(--ai-input-border-color),
+        var(--input-bg-color)
+      )
+      border-box;
   animation: rotate 2s linear infinite;
 }
 

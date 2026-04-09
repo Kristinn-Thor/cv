@@ -106,7 +106,7 @@ const InfoWindow: React.FC<Props> = ({children, color}) => {
         </button>
       </div>
       <div
-        className="infoWindow absolute top-0 right-0 opacity-0 -translate-y-full w-screen flex flex-col items-center justify-center px-4 pt-25 pb-10 border-b border-(--theme-color-green) bg-(--bg-color-transparent) z-10"
+        className="infoWindow absolute top-0 right-0 opacity-0 -translate-y-full w-screen flex flex-col items-center justify-center px-4 pt-25 pb-10 border-b border-(--icon-color) bg-[hsla(var(--bg-hsl),0.95)] z-10"
         style={{
           pointerEvents: isVisible ? 'auto' : 'none',
         }}

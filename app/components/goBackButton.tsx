@@ -16,7 +16,7 @@ const GoBackButton: React.FC<Props> = ({to, color}) => {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={2}
-        stroke={color || 'currentColor'}
+        stroke={color || 'var(--icon-color)'}
         strokeLinecap="round"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

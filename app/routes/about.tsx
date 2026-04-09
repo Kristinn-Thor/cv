@@ -24,11 +24,18 @@ export default function About() {
         <h1 className="AboutTitle opacity-0 font-bold text-4xl text-(--text-highlight-color) mb-[25px]">
           Um mig
         </h1>
-        <div className="AboutText opacity-0 bg-[rgba(196,196,196,0.05)] rounded-2xl p-4 mb-[25px] max-w-[800px]">
+        <div className="AboutText opacity-0 bg-(--container-bg-color) rounded-2xl p-4 mb-[25px] max-w-[800px]">
           <p>
-            Aðal áhugasvið er vefhönnun og notendaviðmót. Með það markmið að
-            bæta notendaupplifun og gera hönnun skalanlega.
+            Vann sem “full stack” forritari frá 2021 til 2025 hjá
+            nýsköpunarfyrirtækinu Driftline ehf. Var þar í lykilhlutverki sem
+            kom að hönnun og þróun á ýmsum kerfum, þar á meðal:
           </p>
+          <ul className="list-disc list-inside my-1">
+            <li>Gagnagrunnur (Firestore)</li>
+            <li>Bakendi (node js/Firebase)</li>
+            <li>Farsímaforrit (React Native-IOS/Android)</li>
+            <li>Vefforrit (Next.js)</li>
+          </ul>
           <p>Metnaðarfullur, vandvirkur og með auga fyrir smáatriðum.</p>
           <p>Önnur áhugamál eru hlaup🏃‍♂️, líkamsrækt🏋️ og fjallgöngur⛰️.</p>
         </div>
