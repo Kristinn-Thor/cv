@@ -9,6 +9,7 @@ import {
 
 import type {Route} from './+types/root';
 import './app.css';
+import {ThemeProvider} from './components/themeContext';
 
 export const links: Route.LinksFunction = () => [
   {rel: 'preconnect', href: 'https://fonts.googleapis.com'},
@@ -29,6 +30,36 @@ export function Layout({children}: {children: React.ReactNode}) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* // This custom script runs before React hydration to set the initial theme class on the body */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function setThemeClass() {
+                  try {
+                    var theme = localStorage.getItem('theme');
+                    var body = document.body;
+                    if (!body) return;
+                    if (theme === 'light' || theme === 'dark') {
+                      body.classList.add(theme);
+                    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                      body.classList.add('dark');
+                    } else {
+                      body.classList.add('light');
+                    }
+                  } catch (e) {
+                    if (document.body) document.body.classList.add('dark');
+                  }
+                }
+                if (document.body) {
+                  setThemeClass();
+                } else {
+                  window.addEventListener('DOMContentLoaded', setThemeClass);
+                }
+              })();
+            `,
+          }}
+        />
         <Meta />
         <Links />
       </head>
@@ -42,7 +73,11 @@ export function Layout({children}: {children: React.ReactNode}) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <ThemeProvider>
+      <Outlet />
+    </ThemeProvider>
+  );
 }
 
 export function ErrorBoundary({error}: Route.ErrorBoundaryProps) {

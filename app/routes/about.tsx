@@ -18,15 +18,15 @@ export default function About() {
     });
   }, []);
   return (
-    <div className="relative flex justify-center items-center overflow-hidden w-full h-screen z-0">
+    <div className="relative flex flex-col items-center w-full h-screen z-0">
       <div className="Mask" style={{opacity: 1}} />
-      <div className="flex flex-col items-center p-10">
+      <div className="flex flex-col items-center overflow-y-auto px-[10%] py-[100px]">
         <h1 className="AboutTitle opacity-0 font-bold text-4xl text-(--text-highlight-color) mb-[25px]">
           Um mig
         </h1>
         <div className="AboutText opacity-0 bg-(--container-bg-color) rounded-2xl p-4 mb-[25px] max-w-[800px]">
           <p>
-            Vann sem “full stack” forritari frá 2021 til 2025 hjá
+            Ég vann sem “full stack” forritari frá 2021 til 2025 hjá
             nýsköpunarfyrirtækinu Driftline ehf. Var þar í lykilhlutverki sem
             kom að hönnun og þróun á ýmsum kerfum, þar á meðal:
           </p>

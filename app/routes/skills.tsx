@@ -21,32 +21,36 @@ export default function Skills() {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center px-[10%] pt-[100px] pb-[120px] overflow-hidden w-full h-screen z-0">
+    <div className="relative flex flex-col items-center w-full h-screen z-0">
       <div className="Mask" style={{opacity: 1}} />
-      <h1 className="SkilsTitle font-bold text-4xl text-(--text-highlight-color) mb-[25px] opacity-0">
-        Tæknistakkur
-      </h1>
+      <div className="flex flex-col items-center overflow-y-auto px-[10%] py-[100px]">
+        <h1 className="SkilsTitle font-bold text-4xl text-(--text-highlight-color) mb-[25px] opacity-0">
+          Tæknistakkur
+        </h1>
 
-      <div className="max-w-xl">
-        <p className="SkilsText bg-(--container-bg-color) rounded-2xl p-4 mb-5 opacity-0">
-          <span>Ótæmandi listi af tólum sem ég hef unnið með:</span>
-          <br />
-          HTML - CSS - JavaScript - React - node.js - express.js - GraphQL - SQL
-        </p>
-        <div className="SkilsIconContainer flex flex-wrap justify-center bg-(--container-bg-color) rounded-2xl p-4 opacity-0">
-          {iconResources.map((icon) => (
-            <IconCircle
-              from={0}
-              to={360}
-              duration={1}
-              logoSource={icon.src}
-              logoScale={icon.scale}
-              logoX={icon.x}
-              logoY={icon.y}
-              logoText={icon.text}
-              circleColor={icon.color}
-            />
-          ))}
+        <div className="max-w-xl">
+          <p className="SkilsText bg-(--container-bg-color) rounded-2xl p-4 mb-5 opacity-0">
+            <span>Ótæmandi listi af tólum sem ég hef unnið með:</span>
+            <br />
+            HTML - CSS - JavaScript - React - node.js - express.js - GraphQL -
+            SQL
+          </p>
+          <div className="SkilsIconContainer flex flex-wrap justify-center bg-(--container-bg-color) rounded-2xl p-4 opacity-0">
+            {iconResources.map((icon) => (
+              <IconCircle
+                key={icon.text}
+                from={0}
+                to={360}
+                duration={1}
+                logoSource={icon.src}
+                logoScale={icon.scale}
+                logoX={icon.x}
+                logoY={icon.y}
+                logoText={icon.text}
+                circleColor={icon.color}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

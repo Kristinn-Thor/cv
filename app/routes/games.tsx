@@ -15,7 +15,7 @@ export default function Games() {
   return (
     <div className="relative w-full h-screen Page opacity-0">
       <div className="absolute top-5 left-4">
-        <GoBackButton to="/projects" color="var(--theme-color-green)" />
+        <GoBackButton to="/projects" />
       </div>
       <TicTackToe lightOn={true} />
     </div>
