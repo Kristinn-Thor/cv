@@ -10,9 +10,10 @@ import {
 } from './apiFunctions';
 import {RenderChat} from './renderFunctions';
 
-type ServerAvailability = {
+type ServerStatus = {
   available: boolean;
   message: string;
+  responseError: boolean;
 };
 
 const AiAssistant: React.FC = () => {
@@ -20,9 +21,10 @@ const AiAssistant: React.FC = () => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState<ChatHistory[]>();
   const [isLoading, setIsLoading] = useState(false);
-  const [serverStatus, setServerStatus] = useState<ServerAvailability>({
+  const [serverStatus, setServerStatus] = useState<ServerStatus>({
     available: true,
     message: '',
+    responseError: false,
   });
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const AiAssistant: React.FC = () => {
       setServerStatus({
         available: false,
         message: 'Spinning up the AI Assistant server...',
+        responseError: false,
       });
       const isServerUp = await pingServer();
       setIsLoading(false);
@@ -39,15 +42,17 @@ const AiAssistant: React.FC = () => {
           available: false,
           message:
             'Sorry, the AI Assistant server is currently unavailable. Please try again later.',
+          responseError: false,
         });
       } else {
-        setServerStatus({available: true, message: ''});
+        setServerStatus({available: true, message: '', responseError: false});
       }
     };
     checkServer();
   }, []);
 
   const handleSendMessage = async () => {
+    setServerStatus((prev) => ({...prev, responseError: false}));
     if (!input.trim()) return;
     const userMessage: AiRequest = {
       prompt: input,
@@ -62,10 +67,13 @@ const AiAssistant: React.FC = () => {
       setInput('');
     } else {
       setInput('');
-      setMessage(
-        response.message ||
-          'An error occurred while communicating with the AI Assistant.',
-      );
+      setServerStatus((prev) => ({
+        ...prev,
+        responseError: true,
+        message:
+          response.message + '. Please try again.' ||
+          'An error occurred while communicating with the AI Assistant. Please try again.',
+      }));
     }
   };
 
@@ -87,7 +95,7 @@ const AiAssistant: React.FC = () => {
           )}
         </div>
         <div
-          className={`flex rounded-2xl p-4 mb-4 ${isLoading ? 'RotatingBorderEffect' : 'bg-(--overlay-color)'} `}
+          className={`flex rounded-2xl p-4 mb-4 ${isLoading ? 'RotatingBorderEffect' : 'bg-(--input-bg-color)'}`}
           style={{
             border: '2px solid transparent',
           }}
@@ -106,7 +114,7 @@ const AiAssistant: React.FC = () => {
             }}
           />
           <button
-            className={`bg-(--effect-color) w-10 h-10 ml-4 rounded-full ${checkIfButtonShouldBeDisabled() ? '' : 'cursor-pointer'}`}
+            className={`bg-(--nav-color-dm) w-10 h-10 ml-4 rounded-full ${checkIfButtonShouldBeDisabled() ? '' : 'cursor-pointer'}`}
             onClick={handleSendMessage}
             disabled={checkIfButtonShouldBeDisabled()}
             title={isLoading ? undefined : 'Send message'}
