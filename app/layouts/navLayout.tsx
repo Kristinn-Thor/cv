@@ -13,18 +13,18 @@ export function meta({}: Route.MetaArgs) {
 export default function NavLayout() {
   return (
     <div className="relative overflow-hidden w-full h-screen">
-      <div className="absolute top-4 right-4 z-10">
+      <div className="absolute top-4 right-4 z-10 min-[450px]:right-7">
         <ThemeButton />
       </div>
       <Outlet />
-      <footer
+      {/* <footer
         className="fixed bottom-0 left-0 flex justify-center w-full h-[12%] min-h-[90px]"
         style={{
           background: `linear-gradient(hsla(var(--bg-hsl), 0) 0%, hsla(var(--bg-hsl), 1) 50%)`,
         }}
       >
         <Navbar />
-      </footer>
+      </footer> */}
     </div>
   );
 }

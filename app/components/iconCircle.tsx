@@ -1,5 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   logoSource: string;
@@ -11,6 +13,9 @@ type Props = {
   from: number;
   to: number;
   duration: number;
+  delay?: number;
+  useScrollTrigger?: boolean;
+  scrollerRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 const IconCircle: React.FC<Props> = ({
@@ -23,26 +28,46 @@ const IconCircle: React.FC<Props> = ({
   from,
   to,
   duration,
+  delay = 0,
+  scrollerRef,
+  useScrollTrigger = false,
 }) => {
   const [deg, setDeg] = useState(from); // Animation starts from this number
-  const obj = useRef({deg: 0});
+  const iconRef = useRef<HTMLDivElement>(null);
+  const degRef = useRef({deg: from});
   useEffect(() => {
-    let tween = gsap.to(obj.current, {
+    let tween = gsap.to(degRef.current, {
       deg: to,
       duration,
       ease: 'power4.inOut',
+      delay,
+      paused: true,
       onUpdate: () => {
-        setDeg(obj.current.deg);
+        setDeg(degRef.current.deg);
       },
     });
+    if (useScrollTrigger && scrollerRef?.current && iconRef.current) {
+      ScrollTrigger.create({
+        trigger: iconRef.current,
+        start: 'top bottom',
+        scroller: scrollerRef?.current,
+        onEnter: () => tween.play(),
+      });
+    } else {
+      tween.play();
+    }
+
     return function cleanup() {
       // When component unmounts we stop the animation(stop trying to update the state)
       tween.kill();
     };
-  }, [from, to, duration]);
+  }, [from, to, duration, delay, scrollerRef, useScrollTrigger]);
 
   return (
-    <div className="flex flex-col justify-center items-center p-1">
+    <div
+      className="flex flex-col justify-center items-center p-1"
+      ref={iconRef}
+    >
       <svg viewBox="-35 0 170 100" className="w-30 h-22">
         <circle
           cx="50"

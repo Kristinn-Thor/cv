@@ -1,15 +1,7 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import type {Route} from './+types/contact';
 import {faEnvelope, faPhone} from '@fortawesome/free-solid-svg-icons';
 import {useEffect} from 'react';
 import gsap from 'gsap';
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    {title: 'Kristinn - Cirriculum Vitae'},
-    {name: 'description', content: 'Welcome to my homepage!'},
-  ];
-}
 
 export default function Contact() {
   useEffect(() => {

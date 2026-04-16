@@ -1,56 +1,80 @@
-import type {Route} from './+types/home';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    {title: 'Kristinn - Cirriculum Vitae'},
-    {name: 'description', content: 'Welcome to my homepage!'},
-  ];
-}
+import About from '~/content/about';
+import Skills from '~/content/skills';
+import Projects from '~/content/projects';
+import Contact from '~/content/contact';
+import Welcome from '~/content/welcome';
 
 export default function Home() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     gsap.fromTo(
       '.Mask',
       {x: '700', y: '-700'},
-      {x: '0', y: '0', opacity: 1, duration: 1}
+      {x: '0', y: '0', opacity: 1, duration: 1},
     );
-    gsap.to('.HomeTitle, .HomeText', {
-      opacity: 1,
-      duration: 3,
-      stagger: 0.3,
-    });
+
+    const sections = gsap.utils.toArray<HTMLElement>('.Panel');
+    if (scrollContainerRef.current && sections.length > 0) {
+      sections.forEach((section) => {
+        ScrollTrigger.create({
+          trigger: section,
+          scroller: scrollContainerRef.current,
+          start: 'bottom bottom',
+          snap: {snapTo: 1, duration: 0.5, delay: 0, ease: 'power1.out'},
+          markers: false,
+        });
+      });
+    }
   }, []);
 
   return (
-    <div className="relative overflow-hidden w-full h-screen z-0">
+    <div className="relative w-full z-0">
       <div className="Mask" />
-      <section
-        className="flex items-center
-                   w-full h-[80%]
-                   max-[1000px]:flex-col max-[1000px]:justify-center"
+      <div
+        className="ScrollContainer w-full overflow-y-auto px-2"
+        ref={scrollContainerRef}
+        style={{maxHeight: '100vh', minHeight: '100vh'}}
       >
-        <h1
-          className="HomeTitle
-                     font-bold text-7xl text-(--text-highlight-color) text-start
-                     w-[50%] tracking-wide ml-[10%] mr-7
-                     max-[1000px]:w-[85%] max-[1000px]:m-5 max-[550px]:text-5xl
-                     opacity-0
-                    "
-        >
-          Velkomin
-        </h1>
-        <h3
-          className="HomeText 
-                       text-2xl font-semibold
-                       w-[50%] mr-[10%]
-                       max-[1000px]:w-[85%] max-[1000px]:m-5
-                       opacity-0"
-        >
-          Hæ, ég heiti Kristinn og er forritari.
-        </h3>
-      </section>
+        <Welcome className="Panel" />
+        <About className="Panel" scrollerRef={scrollContainerRef} />
+        <Skills className="Panel" scrollerRef={scrollContainerRef} />
+        <Projects className="Panel" scrollerRef={scrollContainerRef} />
+        <Contact className="Panel" scrollerRef={scrollContainerRef} />
+      </div>
     </div>
   );
 }
+
+// <div className="relative overflow-hidden w-full h-screen z-0">
+//   <div className="Mask" />
+//   <section
+//     className="flex items-center
+//                w-full h-[80%]
+//                max-[1000px]:flex-col max-[1000px]:justify-center"
+//   >
+//     <h1
+//       className="HomeTitle
+//                  font-bold text-7xl text-(--text-highlight-color) text-start
+//                  w-[50%] tracking-wide ml-[10%] mr-7
+//                  max-[1000px]:w-[85%] max-[1000px]:m-5 max-[550px]:text-5xl
+//                  opacity-0
+//                 "
+//     >
+//       Velkomin
+//     </h1>
+//     <h3
+//       className="HomeText
+//                    text-2xl font-semibold
+//                    w-[50%] mr-[10%]
+//                    max-[1000px]:w-[85%] max-[1000px]:m-5
+//                    opacity-0"
+//     >
+//       Hæ, ég heiti Kristinn og er forritari.
+//     </h3>
+//   </section>
+// </div>

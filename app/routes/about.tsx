@@ -1,13 +1,5 @@
 import {useEffect} from 'react';
-import type {Route} from './+types/about';
 import gsap from 'gsap';
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    {title: 'Kristinn - Cirriculum Vitae'},
-    {name: 'description', content: 'Welcome to my homepage!'},
-  ];
-}
 
 export default function About() {
   useEffect(() => {
