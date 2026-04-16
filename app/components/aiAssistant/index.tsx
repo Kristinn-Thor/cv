@@ -86,13 +86,13 @@ const AiAssistant: React.FC = () => {
       <RenderChat message={message} chatHistory={chatHistory} />
       <div className="flex-none">
         <div className="flex justify-center items-center h-16">
-          {!serverStatus.available && (
+          {!serverStatus.available || serverStatus.responseError ? (
             <p
-              className={`text-sm ${isLoading ? 'animate-pulse' : ''} ${!serverStatus.available && !isLoading ? 'text-orange-400' : ''}`}
+              className={`text-sm ${isLoading ? 'animate-pulse' : ''} ${!serverStatus.available || (!isLoading && serverStatus.responseError) ? 'text-orange-400' : ''}`}
             >
               {serverStatus.message}
             </p>
-          )}
+          ) : null}
         </div>
         <div
           className={`flex rounded-2xl p-4 mb-4 ${isLoading ? 'RotatingBorderEffect' : 'bg-(--input-bg-color)'}`}
