@@ -12,6 +12,7 @@ import htmlLogo from '../svg/html5-brands.svg';
 import gitLogo from '../svg/git-brands.svg';
 import javaLogo from '../svg/Vector-java.svg';
 import npmLogo from '../svg/npm-brands.svg';
+import Bullet from '~/components/Bullet';
 
 interface Props {
   className?: string;
@@ -30,7 +31,7 @@ export default function Skills({className, scrollerRef}: Props) {
   ) => {
     gsap.to(refs, {
       opacity: 1,
-      duration: back ? 2 : 0.5,
+      duration: back ? 1.5 : 0.5,
       ease: 'power4.in',
       stagger: 0.1,
     });
@@ -85,14 +86,42 @@ export default function Skills({className, scrollerRef}: Props) {
       </h1>
 
       <div className="max-w-xl">
-        <p
+        <div
           className="bg-(--container-bg-color) rounded-2xl p-4 mb-5 opacity-0"
           ref={textRef}
         >
-          <span>Ótæmandi listi af tólum sem ég hef unnið með:</span>
-          <br />
-          HTML - CSS - JavaScript - React - node.js - express.js - GraphQL - SQL
-        </p>
+          <p>Ótæmandi listi af tólum sem ég hef unnið með:</p>
+          <span className="inline-flex items-center mt-6">
+            <Bullet />
+            <p className="ml-2 font-medium">Tungumál</p>
+          </span>
+          <p>HTML, CSS, JavaScript, TypeScript, Python, Java, C#, SQL</p>
+          <span className="inline-flex items-center mt-6">
+            <Bullet />
+            <p className="ml-2 font-medium">Framendatól</p>
+          </span>
+          <p>React, React Router, Next.js, Tailwind CSS, GSAP</p>
+          <span className="inline-flex items-center mt-6">
+            <Bullet />
+            <p className="ml-2 font-medium">Bakendatól</p>
+          </span>
+          <p>Node.js, Express.js</p>
+          <span className="inline-flex items-center mt-6">
+            <Bullet />
+            <p className="ml-2 font-medium">Gagnagrunnar</p>
+          </span>
+          <p>PostgreSQL, Firestore</p>
+          <span className="inline-flex items-center mt-6">
+            <Bullet />
+            <p className="ml-2 font-medium">Skýjaþjónustur</p>
+          </span>
+          <p>Firebase, Google Cloud</p>
+          <span className="inline-flex items-center mt-6">
+            <Bullet />
+            <p className="ml-2 font-medium">Fyrirspurnatungumál</p>
+          </span>
+          <p>GraphQL</p>
+        </div>
         <div
           className="flex flex-wrap justify-center bg-(--container-bg-color) rounded-2xl p-4 opacity-0"
           ref={iconContainerRef}
@@ -104,9 +133,7 @@ export default function Skills({className, scrollerRef}: Props) {
               to={360}
               duration={1.5}
               logoSource={icon.src}
-              logoScale={icon.scale}
-              logoX={icon.x}
-              logoY={icon.y}
+              logoSize="50"
               logoText={icon.text}
               circleColor={icon.color}
               useScrollTrigger
@@ -121,67 +148,43 @@ export default function Skills({className, scrollerRef}: Props) {
 
 const iconResources = [
   {
-    src: jsLogo,
-    color: 'var(--javascript-color)',
-    text: 'JavaScript',
-    scale: '75',
-    x: '12',
-    y: '12',
-  },
-  {
     src: htmlLogo,
     color: 'var(--html-color)',
     text: 'HTML',
-    scale: '85',
-    x: '7',
-    y: '13',
   },
   {
     src: cssLogo,
     color: 'var(--css-color)',
     text: 'CSS',
-    scale: '80',
-    x: '10',
-    y: '13',
   },
   {
-    src: gsapLogo,
-    color: 'var(--gsap-color)',
-    text: 'GSAP',
-    scale: '90',
-    x: '-5',
-    y: '5',
-  },
-  {
-    src: reactLogo,
-    color: 'var(--react-color)',
-    text: 'React',
-    scale: '90',
-    x: '5',
-    y: '5',
-  },
-  {
-    src: gitLogo,
-    color: 'var(--git-color)',
-    text: 'git',
-    scale: '90',
-    x: '5',
-    y: '5',
+    src: jsLogo,
+    color: 'var(--javascript-color)',
+    text: 'JavaScript',
   },
   {
     src: javaLogo,
     color: 'var(--java-color)',
     text: 'Java',
-    scale: '80',
-    x: '10',
-    y: '5',
+  },
+  {
+    src: gsapLogo,
+    color: 'var(--gsap-color)',
+    text: 'GSAP',
+  },
+  {
+    src: reactLogo,
+    color: 'var(--react-color)',
+    text: 'React',
+  },
+  {
+    src: gitLogo,
+    color: 'var(--git-color)',
+    text: 'git',
   },
   {
     src: npmLogo,
     color: 'var(--npm-color)',
     text: 'NPM',
-    scale: '80',
-    x: '10',
-    y: '10',
   },
 ];

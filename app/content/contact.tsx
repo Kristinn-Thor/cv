@@ -25,7 +25,7 @@ export default function Contact({className, scrollerRef}: Props) {
   ) => {
     gsap.to(refs, {
       opacity: 1,
-      duration: back ? 2 : 0.5,
+      duration: back ? 1.5 : 0.5,
       ease: 'power4.in',
       stagger: 0.1,
     });

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Bullet from '~/components/Bullet';
 gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
@@ -19,7 +20,7 @@ export default function About({className, scrollerRef}: Props) {
   ) => {
     gsap.to(refs, {
       opacity: 1,
-      duration: back ? 2 : 0.5,
+      duration: back ? 1.5 : 0.5,
       ease: 'power4.in',
       stagger: 0.1,
     });
@@ -76,12 +77,24 @@ export default function About({className, scrollerRef}: Props) {
           nýsköpunarfyrirtækinu Driftline ehf. Var þar í lykilhlutverki sem kom
           að hönnun og þróun á ýmsum kerfum, þar á meðal:
         </p>
-        <ul className="list-disc list-inside my-1">
-          <li>Gagnagrunnur (Firestore)</li>
-          <li>Bakendi (node js/Firebase)</li>
-          <li>Farsímaforrit (React Native-IOS/Android)</li>
-          <li>Vefforrit (Next.js)</li>
-        </ul>
+        <div className="list-disc list-inside mb-10 mt-4 space-y-4">
+          <div className="flex items-center">
+            <Bullet />
+            <p className="ml-2">Gagnagrunnur (Firestore)</p>
+          </div>
+          <div className="flex items-center">
+            <Bullet />
+            <p className="ml-2">Bakendi (node js/Firebase)</p>
+          </div>
+          <div className="flex items-center">
+            <Bullet />
+            <p className="ml-2">Farsímaforrit (React Native-IOS/Android)</p>
+          </div>
+          <div className="flex items-center">
+            <Bullet />
+            <p className="ml-2">Vefforrit (Next.js)</p>
+          </div>
+        </div>
         <p>Metnaðarfullur, vandvirkur og með auga fyrir smáatriðum.</p>
         <p>Önnur áhugamál eru hlaup🏃‍♂️, líkamsrækt🏋️ og fjallgöngur⛰️.</p>
       </div>
