@@ -5,14 +5,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   logoSource: string;
-  logoScale: string;
-  logoX: string;
-  logoY: string;
+  logoSize: string;
   logoText: string;
-  circleColor: string;
   from: number;
   to: number;
   duration: number;
+  circleColor: string;
+  circleRadius?: number;
+  circleWidth?: number;
   delay?: number;
   useScrollTrigger?: boolean;
   scrollerRef?: React.RefObject<HTMLDivElement | null>;
@@ -20,14 +20,14 @@ type Props = {
 
 const IconCircle: React.FC<Props> = ({
   logoSource,
-  logoScale,
-  logoX,
-  logoY,
+  logoSize,
   logoText,
-  circleColor,
   from,
   to,
   duration,
+  circleColor,
+  circleRadius,
+  circleWidth = 5,
   delay = 0,
   scrollerRef,
   useScrollTrigger = false,
@@ -35,6 +35,17 @@ const IconCircle: React.FC<Props> = ({
   const [deg, setDeg] = useState(from); // Animation starts from this number
   const iconRef = useRef<HTMLDivElement>(null);
   const degRef = useRef({deg: from});
+
+  const r = circleRadius || 40;
+  // Center of the circle
+  const cx = 50;
+  const cy = 50;
+  // Parse logoSize to number (remove px if present)
+  const size = typeof logoSize === 'string' ? parseFloat(logoSize) : r;
+  // Center image
+  const x = cx - size / 2;
+  const y = cy - size / 2;
+
   useEffect(() => {
     let tween = gsap.to(degRef.current, {
       deg: to,
@@ -68,23 +79,23 @@ const IconCircle: React.FC<Props> = ({
       className="flex flex-col justify-center items-center p-1"
       ref={iconRef}
     >
-      <svg viewBox="-35 0 170 100" className="w-30 h-22">
+      <svg viewBox="0 0 100 100" className="w-22 h-22">
         <circle
-          cx="50"
-          cy="50"
-          r="57"
+          cx={cx}
+          cy={cy}
+          r={r}
           stroke={circleColor}
-          strokeWidth="10"
+          strokeWidth={circleWidth}
           strokeDasharray={`${deg} 360`}
           strokeLinecap="round"
           fill="none"
         />
         <image
           id="logo"
-          x={logoX}
-          y={logoY}
-          width={logoScale}
-          height={logoScale}
+          x={x}
+          y={y}
+          width={size}
+          height={size}
           href={`${logoSource}`}
         />
         <animate>xlink:href='logo'</animate>
