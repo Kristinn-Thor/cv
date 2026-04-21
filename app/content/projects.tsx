@@ -89,6 +89,7 @@ export default function Projects({className, scrollerRef}: Props) {
 
   return (
     <div
+      id="Projects"
       className={`flex flex-col items-center justify-center w-full min-h-screen ${className}`}
       ref={contentRef}
     >

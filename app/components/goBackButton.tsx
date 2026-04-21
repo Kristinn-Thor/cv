@@ -2,15 +2,16 @@ import React from 'react';
 import {Link} from 'react-router';
 
 interface Props {
-  to?: string; // some/path
+  to?: {pathname: string; search?: string; hash?: string}; // see -> https://api.reactrouter.com/v7/interfaces/react-router.Path.html
+  state?: any; // {some: "state"} - this can be accessed in the target component via useLocation().state
   color?: string;
 }
 
-const GoBackButton: React.FC<Props> = ({to, color}) => {
+const GoBackButton: React.FC<Props> = ({to, state, color}) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const animationDuration = 200; // ms
   return (
-    <Link to={to || '/'} className="flex">
+    <Link to={to || '/'} state={state} className="flex">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

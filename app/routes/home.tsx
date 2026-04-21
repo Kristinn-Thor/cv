@@ -1,7 +1,10 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {useLocation} from 'react-router';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
 
 import About from '~/content/about';
 import Skills from '~/content/skills';
@@ -10,7 +13,9 @@ import Contact from '~/content/contact';
 import Welcome from '~/content/welcome';
 
 export default function Home() {
+  const location = useLocation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     gsap.fromTo(
       '.Mask',
@@ -30,7 +35,25 @@ export default function Home() {
         });
       });
     }
-  }, []);
+
+    const scrollTo = location.state?.scrollTo as string | undefined;
+    const alreadyScrolled = sessionStorage.getItem('scrolledToProjects');
+    if (scrollTo === 'Projects' && !alreadyScrolled) {
+      if (scrollContainerRef.current) {
+        gsap.to(scrollContainerRef.current, {
+          scrollTo: `#${scrollTo}`,
+          duration: 0.5,
+          ease: 'power2.out',
+          onComplete: () => {
+            sessionStorage.setItem('scrolledToProjects', 'true');
+          },
+        });
+      }
+    }
+    return () => {
+      sessionStorage.removeItem('scrolledToProjects');
+    };
+  }, [location.state]);
 
   return (
     <div className="relative w-full z-0">

@@ -71,7 +71,7 @@ export default function Contact({className, scrollerRef}: Props) {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    showToast('Copied to clipboard ✔️', 'success', 3);
+    showToast('Copied to clipboard!', 'success', 3);
   };
 
   return (
