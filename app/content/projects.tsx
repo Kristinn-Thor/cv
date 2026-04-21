@@ -8,16 +8,18 @@ const projectList: {
   title: string;
   description: string;
   link: string;
+  external?: boolean;
 }[] = [
   {
     title: 'Milla',
-    description: 'Einfaldur milluleikur útfærður í React',
+    description: 'Milluleikur útfærður í React',
     link: '/games',
   },
   {
     title: 'Myndaalbúm',
     description: 'Einföld myndasíða skrifuð í html, css og js',
     link: 'https://kristinn-thor.github.io/lazy-loading-img/',
+    external: true,
   },
   {
     title: 'AI Assistant',
@@ -109,17 +111,32 @@ export default function Projects({className, scrollerRef}: Props) {
             className="opacity-0 rounded-lg p-1 transition-colors duration-300 hover:bg-(--container-bg-color)"
             ref={listItemRefs[index]}
           >
-            <Link
-              to={project.link}
-              className="text-(--text-highlight-color)"
-              rel="noopener noreferrer"
-            >
-              <p>
-                <span className="font-bold">{project.title}</span>
-                <span className="mx-1">-</span>
-                <span>{project.description}</span>
-              </p>
-            </Link>
+            {project.external ? (
+              <a
+                href={project.link}
+                className="text-(--text-highlight-color)"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <p>
+                  <span className="font-bold">{project.title}</span>
+                  <span className="mx-1">-</span>
+                  <span>{project.description}</span>
+                </p>
+              </a>
+            ) : (
+              <Link
+                to={project.link}
+                className="text-(--text-highlight-color)"
+                rel="noopener noreferrer"
+              >
+                <p>
+                  <span className="font-bold">{project.title}</span>
+                  <span className="mx-1">-</span>
+                  <span>{project.description}</span>
+                </p>
+              </Link>
+            )}
           </li>
         ))}
       </ul>

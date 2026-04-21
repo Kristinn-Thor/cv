@@ -27,17 +27,32 @@ export default function Projects() {
             key={index}
             className={`${project.className} opacity-0 rounded-lg p-1 transition-colors duration-300 hover:bg-(--container-bg-color)`}
           >
-            <Link
-              to={project.link}
-              className="text-(--text-highlight-color)"
-              rel="noopener noreferrer"
-            >
-              <p className="">
-                <span className="font-bold">{project.title}</span>
-                <span className="mx-1">-</span>
-                <span>{project.description}</span>
-              </p>
-            </Link>
+            {project.external ? (
+              <a
+                href={project.link}
+                className="text-(--text-highlight-color)"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <p>
+                  <span className="font-bold">{project.title}</span>
+                  <span className="mx-1">-</span>
+                  <span>{project.description}</span>
+                </p>
+              </a>
+            ) : (
+              <Link
+                to={project.link}
+                className="text-(--text-highlight-color)"
+                rel="noopener noreferrer"
+              >
+                <p>
+                  <span className="font-bold">{project.title}</span>
+                  <span className="mx-1">-</span>
+                  <span>{project.description}</span>
+                </p>
+              </Link>
+            )}
           </li>
         ))}
       </ul>
@@ -50,6 +65,7 @@ const projectList: {
   description: string;
   link: string;
   className: string;
+  external?: boolean;
 }[] = [
   {
     title: 'Milla',
@@ -62,6 +78,7 @@ const projectList: {
     description: 'Einföld myndasíða skrifuð í html, css og js',
     link: 'https://kristinn-thor.github.io/lazy-loading-img/',
     className: 'ProjectListItem2',
+    external: true,
   },
   {
     title: 'AI Assistant',
