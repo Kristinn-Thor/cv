@@ -107,7 +107,7 @@ const TicTackToe: React.FC<{lightOn: boolean}> = ({lightOn}) => {
         />
       </div>
       <div className="flex justify-center items-center mt-4 w-full  h-full sm:w-1/2 sm:h-1/2 sm:mt-0 ">
-        <div className="">
+        <div className="my-10">
           <div
             className={`${winner ? 'text-pink-400' : lightOn ? 'text-(--theme-color-blue)' : 'text-(--theme-color-green)'} flex flex-col`}
           >
