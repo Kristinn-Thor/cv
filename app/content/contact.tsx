@@ -83,7 +83,7 @@ export default function Contact({className, scrollerRef}: Props) {
         className="opacity-0 font-bold text-4xl text-(--text-highlight-color) mb-[25px]"
         ref={titleRef}
       >
-        Vertu í bandi
+        Hafa samband
       </h1>
       <ul
         className="opacity-0 bg-(--container-bg-color) rounded-2xl p-4"
