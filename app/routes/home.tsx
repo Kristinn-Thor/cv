@@ -11,10 +11,24 @@ import Skills from '~/content/skills';
 import Projects from '~/content/projects';
 import Contact from '~/content/contact';
 import Welcome from '~/content/welcome';
+import DownGesture from '~/components/downGesture';
 
 export default function Home() {
   const location = useLocation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [showDownGesture, setShowDownGesture] = useState<boolean>(false);
+
+  const trackScrollProgress = () => {
+    if (scrollContainerRef.current) {
+      const {scrollTop, scrollHeight, clientHeight} =
+        scrollContainerRef.current;
+      const totalScrollableHeight = scrollHeight - clientHeight;
+      const progress =
+        totalScrollableHeight > 0 ? scrollTop / totalScrollableHeight : 0;
+      setScrollProgress(progress);
+    }
+  };
 
   useEffect(() => {
     gsap.fromTo(
@@ -22,6 +36,13 @@ export default function Home() {
       {x: '700', y: '-700'},
       {x: '0', y: '0', opacity: 1, duration: 1},
     );
+
+    // Toggle down gesture visibility
+    const gestureInterval = setInterval(() => {
+      setShowDownGesture((prev) => {
+        return !prev;
+      });
+    }, 3000); // Check every 3 seconds
 
     const sections = gsap.utils.toArray<HTMLElement>('.Panel');
     if (scrollContainerRef.current && sections.length > 0) {
@@ -52,6 +73,7 @@ export default function Home() {
     }
     return () => {
       sessionStorage.removeItem('scrolledToProjects');
+      clearInterval(gestureInterval);
     };
   }, [location.state]);
 
@@ -62,7 +84,12 @@ export default function Home() {
         className="ScrollContainer w-full overflow-y-auto px-2"
         ref={scrollContainerRef}
         style={{maxHeight: '100vh', minHeight: '100vh'}}
+        onScroll={trackScrollProgress}
       >
+        <DownGesture
+          size={50}
+          className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 animate-bounce transition-opacity duration-800 ${showDownGesture && scrollProgress <= 0.05 ? 'opacity-100' : 'opacity-0'}`}
+        />
         <Welcome className="Panel" />
         <About className="Panel" scrollerRef={scrollContainerRef} />
         <Skills className="Panel" scrollerRef={scrollContainerRef} />
