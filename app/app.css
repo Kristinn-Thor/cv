@@ -77,13 +77,27 @@ p {
   --icon-color: var(--theme-color-green);
   --text-highlight-color: var(--theme-color-green);
   /* Skill-Colors */
-  --javascript-color: #f0db4f;
   --html-color: #f06529;
   --css-color: #2965f1;
+  --javascript-color: #f0db4f;
+  --typescript-color: #007acc;
+  --python-color: #fdd835;
+  --java-color: #ea8c10;
+  --cSharp-color: #68217a;
   --gsap-color: #08d80c;
   --react-color: #61dbfb;
+  --react-router-color: #f44250;
+  --next-js-color: #fff;
+  --tailwind-color: #38bdf8;
+  --node-color: #8bc34a;
+  --express-color: #000000;
+  --postgres-color: #336791;
+  --firestore-color: #669df6;
+  --firebase-color: #dd2c00;
+  --google-cloud-color: #36a852;
+  --graph-ql-color: #e535ab;
+  --sql-color: #4479a1;
   --git-color: #e84d31;
-  --java-color: #ea8c10;
   --npm-color: #c53635;
   /* NAV-Colors */
   --nav-color: var(--nav-color-dm);

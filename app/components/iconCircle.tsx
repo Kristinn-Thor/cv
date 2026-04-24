@@ -5,14 +5,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   logoSource: string;
-  logoSize: string;
-  logoText: string;
-  from: number;
-  to: number;
-  duration: number;
   circleColor: string;
+  logoSize?: string;
   circleRadius?: number;
   circleWidth?: number;
+  logoText?: string;
+  from?: number;
+  to?: number;
+  duration?: number;
   delay?: number;
   useScrollTrigger?: boolean;
   scrollerRef?: React.RefObject<HTMLDivElement | null>;
@@ -20,14 +20,14 @@ type Props = {
 
 const IconCircle: React.FC<Props> = ({
   logoSource,
-  logoSize,
-  logoText,
-  from,
-  to,
-  duration,
+  logoSize = '50',
   circleColor,
   circleRadius,
   circleWidth = 5,
+  logoText = '',
+  from = 0,
+  to = 360,
+  duration = 1.5,
   delay = 0,
   scrollerRef,
   useScrollTrigger = false,
@@ -36,12 +36,13 @@ const IconCircle: React.FC<Props> = ({
   const iconRef = useRef<HTMLDivElement>(null);
   const degRef = useRef({deg: from});
 
-  const r = circleRadius || 40;
   // Center of the circle
   const cx = 50;
   const cy = 50;
   // Parse logoSize to number (remove px if present)
-  const size = typeof logoSize === 'string' ? parseFloat(logoSize) : r;
+  const size = typeof logoSize === 'string' ? parseFloat(logoSize) : 40;
+  const r = circleRadius || size - size / 5;
+
   // Center image
   const x = cx - size / 2;
   const y = cy - size / 2;
@@ -75,11 +76,14 @@ const IconCircle: React.FC<Props> = ({
   }, [from, to, duration, delay, scrollerRef, useScrollTrigger]);
 
   return (
-    <div
-      className="flex flex-col justify-center items-center p-1"
-      ref={iconRef}
-    >
-      <svg viewBox="0 0 100 100" className="w-22 h-22">
+    <div className={`flex flex-col justify-center items-center`} ref={iconRef}>
+      <svg
+        viewBox="0 0 100 100"
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+        }}
+      >
         <circle
           cx={cx}
           cy={cy}
@@ -100,7 +104,7 @@ const IconCircle: React.FC<Props> = ({
         />
         <animate>xlink:href='logo'</animate>
       </svg>
-      <p className="text-xl font-bold">{logoText}</p>
+      {logoText && <p className="text-xl font-bold">{logoText}</p>}
     </div>
   );
 };
