@@ -11,6 +11,16 @@ const projectList: {
   external?: boolean;
 }[] = [
   {
+    title: 'Heimasíða Skipulag & skjöl ehf.',
+    description: 'Síða útfærð í Next.js m.t.t. leitarvélabestunar',
+    link: 'https://skjalastjornun.is/',
+  },
+  {
+    title: 'AI Assistant',
+    description: 'Gervigreindartól byggt á Claude Code',
+    link: '/ai-assistant',
+  },
+  {
     title: 'Milla',
     description: 'Milluleikur útfærður í React',
     link: '/games',
@@ -20,11 +30,6 @@ const projectList: {
     description: 'Einföld myndasíða skrifuð í html, css og js',
     link: 'https://kristinn-thor.github.io/lazy-loading-img/',
     external: true,
-  },
-  {
-    title: 'AI Assistant',
-    description: 'Gervigreindartól byggt á Claude Code',
-    link: '/ai-assistant',
   },
 ];
 
