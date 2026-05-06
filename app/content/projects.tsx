@@ -14,6 +14,7 @@ const projectList: {
     title: 'Heimasíða Skipulag & skjöl ehf.',
     description: 'Síða útfærð í Next.js m.t.t. leitarvélabestunar',
     link: 'https://skjalastjornun.is/',
+    external: true,
   },
   {
     title: 'AI Assistant',
